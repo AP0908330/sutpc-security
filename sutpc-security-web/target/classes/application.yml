@@ -1,2 +1,9 @@
 server:
   port: 9900
+#  servlet-path: /sys
+
+sutpc:
+  security:
+    browser:
+      loginPage: /web-login.html
+      loginType: REDIRECT

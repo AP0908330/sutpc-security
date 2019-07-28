@@ -1,0 +1,17 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.sutpc.security.core.properties.SecurityProperties",
+      "name": "sutpc.security",
+      "type": "com.sutpc.security.core.properties.SecurityProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.sutpc.security.core.properties.SecurityProperties",
+      "name": "sutpc.security.browser",
+      "type": "com.sutpc.security.core.properties.BrowserProperties"
+    }
+  ]
+}

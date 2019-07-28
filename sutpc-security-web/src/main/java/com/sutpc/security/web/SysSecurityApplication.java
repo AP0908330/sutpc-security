@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: Created in 20:07 2019/7/26 0026.
  * @Modified By:
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.sutpc.security"})
 @RestController
 public class SysSecurityApplication {
 
