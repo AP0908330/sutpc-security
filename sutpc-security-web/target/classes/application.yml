@@ -7,3 +7,9 @@ sutpc:
     browser:
       loginPage: /web-login.html
       loginType: REDIRECT
+security:
+  oauth2:
+    client:
+      client-id: sutpc-sys
+      client-secret: 123456
+

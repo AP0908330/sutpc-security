@@ -2,6 +2,8 @@ package com.sutpc.security.browser;
 
 import com.sutpc.security.browser.authentication.SysAuthenticationFailureHandler;
 import com.sutpc.security.browser.authentication.SysAuthenticationSuccessHandler;
+import com.sutpc.security.core.SmsCodeFilter;
+import com.sutpc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.sutpc.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * Created by sx on 2019/7/27.
@@ -22,9 +25,18 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     private SysAuthenticationSuccessHandler sysAuthenticationSuccessHandler;
     @Autowired
     private SysAuthenticationFailureHandler sysAuthenticationFailureHandler;
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        SmsCodeFilter smsCodeFilter=new SmsCodeFilter();
+        smsCodeFilter.setSysAuthenticationFailureHandler(sysAuthenticationFailureHandler);
+        smsCodeFilter.afterPropertiesSet();
         http
+                //短信验证码拦截器
+                .addFilterBefore(smsCodeFilter,UsernamePasswordAuthenticationFilter.class)
                 //配置表单登录
                 .formLogin()
                 //配置http basic登录,为默认配置
@@ -45,11 +57,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 //禁止csrf跨站攻击防护
-                .csrf().disable();
+                .csrf().disable()
+                //自定义短信验证码校验逻辑配置
+                .apply(smsCodeAuthenticationSecurityConfig);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+
 }

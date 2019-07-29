@@ -12,9 +12,14 @@
   <artifactId>sutpc-security-web</artifactId>
 
   <dependencies>
-    <dependency>
+ <!-- <dependency>
       <groupId>com.sutpc.security</groupId>
       <artifactId>sutpc-security-browser</artifactId>
+      <version>${sutpc.security.version}</version>
+    </dependency>-->
+    <dependency>
+      <groupId>com.sutpc.security</groupId>
+      <artifactId>sutpc-security-app</artifactId>
       <version>${sutpc.security.version}</version>
     </dependency>
     <dependency>

@@ -1,4 +1,4 @@
-package com.sutpc.security.browser;
+package com.sutpc.security.core.authentication;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +26,6 @@ public class SysUserDetailsService implements UserDetailsService {
         logger.info("login username : {}",username);
         String encode = passwordEncoder.encode("123456");
         logger.info("login password : {}", encode);
-        return new User(username,encode, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        return new User(username,encode, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
     }
 }
