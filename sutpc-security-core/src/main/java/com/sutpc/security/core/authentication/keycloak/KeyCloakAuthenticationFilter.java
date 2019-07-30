@@ -20,8 +20,7 @@ import org.springframework.util.Assert;
  */
 public class KeyCloakAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-  public static final String SUTPC_SECURITY_FORM_MOBILE_KEY = "username";
-  private String usernameParameter = "username";
+  private String usernameParameter = "keycloakUsername";
   private boolean postOnly = true;
 
   public KeyCloakAuthenticationFilter() {
@@ -48,11 +47,10 @@ public class KeyCloakAuthenticationFilter extends AbstractAuthenticationProcessi
 
   /**
    * 获取用户名
-   * @param request
-   * @return
    */
   protected String obtainUsername(HttpServletRequest request) {
-    return request.getParameter(this.usernameParameter);
+    Object attribute = request.getAttribute(this.usernameParameter);
+    return attribute == null ? null : (String) attribute;
   }
 
   protected void setDetails(HttpServletRequest request, KeyCloakAuthenticationToken authRequest) {

@@ -1,6 +1,7 @@
 package com.sutpc.security.core;
 
-import com.sutpc.security.core.authentication.exception.ValidateException;
+import com.sutpc.security.core.authentication.exception.KeyCloakTokenException;
+import com.sutpc.security.core.util.KeyCloakUtils;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,8 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -59,7 +62,7 @@ public class KeyCloakFilter extends OncePerRequestFilter implements Initializing
     if (action) {
       try {
         validateKeyCloakToken(request);
-      } catch (ValidateException e) {
+      } catch (AuthenticationException e) {
         sysAuthenticationFailureHandler.onAuthenticationFailure(request, response, e);
         return;
       }
@@ -69,10 +72,20 @@ public class KeyCloakFilter extends OncePerRequestFilter implements Initializing
 
   /**
    * 校验手机验证码
-   * @param request
    */
   private void validateKeyCloakToken(HttpServletRequest request) {
     //校验keycloakToken
-    //TODO
+    String header = request.getHeader("keycloakToken");
+    if (!StringUtils.isEmpty(header)) {
+      //解析用户名
+      try {
+        String username = KeyCloakUtils.getUserName(header);
+        request.setAttribute("keycloakUsername", username);
+      } catch (Exception e) {
+        throw new KeyCloakTokenException("非法keycloak token");
+      }
+    } else {
+      throw new KeyCloakTokenException("keycloak token为空");
+    }
   }
 }

@@ -12,6 +12,12 @@
       "sourceType": "com.sutpc.security.core.properties.SecurityProperties",
       "name": "sutpc.security.browser",
       "type": "com.sutpc.security.core.properties.BrowserProperties"
+    },
+    {
+      "sourceType": "com.sutpc.security.core.properties.SecurityProperties",
+      "name": "sutpc.security.oauth2",
+      "description": "OAuth2配置",
+      "type": "com.sutpc.security.core.properties.Oauth2Properties"
     }
   ]
 }

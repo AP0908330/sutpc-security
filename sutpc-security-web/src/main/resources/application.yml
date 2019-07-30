@@ -2,14 +2,27 @@ server:
   port: 9900
 #  servlet-path: /sys
 
+# 自定义安全配置
 sutpc:
   security:
     browser:
       loginPage: /web-login.html
       loginType: REDIRECT
+    oauth2:
+      clients[0]:
+        clientId: sutpc-sys
+        clientSecret: 123456
+        accessTokenValiditySeconds: 3600
+      clients[1]:
+        clientId: sutpc-sys-1
+        clientSecret: 123456789
+      storeType: jwt
+
 security:
   oauth2:
     client:
       client-id: sutpc-sys
       client-secret: 123456
+
+
 

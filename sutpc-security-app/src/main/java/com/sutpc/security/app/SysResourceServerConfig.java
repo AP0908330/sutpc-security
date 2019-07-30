@@ -75,6 +75,7 @@ public class SysResourceServerConfig extends ResourceServerConfigurerAdapter {
         .csrf().disable()
         //自定义短信验证码校验逻辑配置
         .apply(smsCodeAuthenticationSecurityConfig)
+        //自定义KeyCloak的token登陆
         .and().apply(keyCloakAuthenticationSecurityConfig);
   }
 }
