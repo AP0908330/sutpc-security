@@ -1,4 +1,4 @@
-package com.sutpc.security.browser;
+package com.sutpc.security.core.authentication;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
