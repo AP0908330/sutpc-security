@@ -1,6 +1,5 @@
 package com.sutpc.security.core.authentication.keycloak;
 
-import com.sutpc.security.core.authentication.mobile.SmsCodeAuthenticationToken;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationServiceException;
