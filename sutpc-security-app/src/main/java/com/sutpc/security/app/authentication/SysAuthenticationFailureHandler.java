@@ -1,7 +1,6 @@
 package com.sutpc.security.app.authentication;
 
 import com.alibaba.fastjson.JSON;
-import com.sutpc.security.core.properties.LoginType;
 import com.sutpc.security.core.properties.SecurityProperties;
 import com.sutpc.security.core.support.SimpleResponse;
 import java.io.IOException;

@@ -1,6 +1,7 @@
 server:
   port: 9900
-#  servlet-path: /sys
+  servlet:
+    context-path: /sys
 
 # 自定义安全配置
 sutpc:

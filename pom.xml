@@ -4,6 +4,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.5.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
   <groupId>com.sutpc.security</groupId>
   <artifactId>sutpc-security</artifactId>
   <version>1.0-SNAPSHOT</version>
@@ -21,20 +28,68 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
+      <!-- https://mvnrepository.com/artifact/io.spring.platform/platform-bom -->
+      <!--<dependency>
         <groupId>io.spring.platform</groupId>
         <artifactId>platform-bom</artifactId>
-        <version>Brussels-SR4</version>
-        <!--<version>Brussels-SR17</version>-->
+        <version>Cairo-SR8</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
+      </dependency>-->
+      <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>Dalston.SR2</version>
+        <version>Greenwich.SR2</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+        <scope>provided</scope>
+      </dependency>
+
+
+      <!--spring-social springboot2.没有更新维护-->
+      <!--<dependency>
+        <groupId>org.springframework.social</groupId>
+        <artifactId>spring-social-config</artifactId>
+        <version>1.1.6.RELEASE</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.social</groupId>
+        <artifactId>spring-social-core</artifactId>
+        <version>1.1.6.RELEASE</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.social</groupId>
+        <artifactId>spring-social-security</artifactId>
+        <version>1.1.6.RELEASE</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.social</groupId>
+        <artifactId>spring-social-web</artifactId>
+        <version>1.1.6.RELEASE</version>
+      </dependency>-->
+      <!--  apache common包 -->
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <version>3.2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.9.3</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

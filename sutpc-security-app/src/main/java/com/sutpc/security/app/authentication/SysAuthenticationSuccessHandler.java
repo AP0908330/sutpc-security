@@ -1,10 +1,9 @@
 package com.sutpc.security.app.authentication;
 
-import com.alibaba.fastjson.JSON;
-import com.sutpc.security.core.properties.LoginType;
 import com.sutpc.security.core.properties.SecurityProperties;
 import java.io.IOException;
 import java.util.HashMap;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +37,7 @@ public class SysAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
   private SecurityProperties securityProperties;
   @Autowired
   private ClientDetailsService clientDetailsService;
-  @Autowired
+  @Resource
   private AuthorizationServerTokenServices authorizationServerTokenServices;
 
   private ObjectMapper objectMapper=new ObjectMapper();
