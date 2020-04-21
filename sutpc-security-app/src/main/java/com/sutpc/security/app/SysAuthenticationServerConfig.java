@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -48,6 +49,9 @@ public class SysAuthenticationServerConfig extends AuthorizationServerConfigurer
   @Autowired(required = false)
   private TokenEnhancer jwtTokenEnhancer;
 
+  @Autowired
+  private PasswordEncoder passwordEncoder;
+
   /**
    * 配置 authenticationManager和sysUserDetailsService
    */
@@ -59,11 +63,11 @@ public class SysAuthenticationServerConfig extends AuthorizationServerConfigurer
     if (null != tokenStore) {
       endpoints.tokenStore(tokenStore);
     }
-    if (null != jwtAccessTokenConverter && null!=jwtTokenEnhancer) {
+    if (null != jwtAccessTokenConverter && null != jwtTokenEnhancer) {
 
-      TokenEnhancerChain chain=new TokenEnhancerChain();
+      TokenEnhancerChain chain = new TokenEnhancerChain();
 
-      List<TokenEnhancer> enhancers=new ArrayList<>();
+      List<TokenEnhancer> enhancers = new ArrayList<>();
       //jwt令牌增强器
       enhancers.add(jwtTokenEnhancer);
       enhancers.add(jwtAccessTokenConverter);
@@ -82,7 +86,7 @@ public class SysAuthenticationServerConfig extends AuthorizationServerConfigurer
       for (Oauth2ClientProperties client : clientProperties) {
         builder
             .withClient(client.getClientId())
-            .secret(client.getClientSecret())
+            .secret(passwordEncoder.encode(client.getClientSecret()))
             .accessTokenValiditySeconds(client.getAccessTokenValiditySeconds())
             .authorizedGrantTypes("refresh_token", "password")
             .scopes("all", "read", "write");
